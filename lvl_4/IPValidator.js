@@ -15,7 +15,6 @@ function isValidIP(ip) {
       || parseInt(part) > 255) {
         return false;
     }
-    
   } 
   
   return true;
