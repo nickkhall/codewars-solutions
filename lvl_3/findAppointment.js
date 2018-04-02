@@ -1,6 +1,6 @@
 function getStartTime(schedules, duration) {
-  let earliest;
-  let latest;
+  let earliest = 0;
+  console.log({ schedules: schedules.map(s => console.log({ s })), duration });
 
   for (let i = 0; i < schedules.length; i++) {
     const employeeSchedule = schedules[i];
@@ -8,12 +8,37 @@ function getStartTime(schedules, duration) {
 
     for (let x = 0; x < employeeSchedule.length; x++) {
       const employeeTimeArr = employeeSchedule[x];
-      const employeeEarliest = employeeTimeArr[0];
-      const employeeLatest = employeeTimeArr[1];
+      const employeeEarliestHour = parseInt(employeeTimeArr[0].split(':')[0]);
+      const employeeEarliestMinute = parseInt(employeeTimeArr[0].split(':')[1]);
 
-      console.log({ employeeEarliest, employeeLatest });
+      const employeeLatestHour = parseInt(employeeTimeArr[1].split(':')[0]);
+      const employeeLatestMinute = parseInt(employeeTimeArr[1].split(':')[1]);
+
+      const employeeLatestFullTime = employeeLatestHour + getTime(employeeLatestMinute);
+
+      if (x === 0) {
+        earliest = employeeLatestFullTime;
+      }
+      if (employeeLatestFullTime < earliest) { console.log('we have a better time available') }
+
+      console.log({ employeeEarliestHour, employeeEarliestMinute, employeeLatestHour, employeeLatestMinute });
+      console.log('\n');
+      console.log({ employeeLatestFullTime });
+      console.log('\n');
+      console.log('--------------------------------------------------------------------------------------------------------');
     }
+    console.log({ earliest });
+    if (earliest.match(/\./g)) {
+      console.log('you have a deci deci brah!', earliest)
+
+    }
+
+    console.log('you can return reggy')
   }
+}
+
+function getTime(time) {
+  return time / 60;
 }
 
 
