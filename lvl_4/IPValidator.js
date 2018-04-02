@@ -1,8 +1,6 @@
 function isValidIP(ip) {
-  console.log({ ip });
   const splitIP = ip.split('.');
-  console.log({ splitIP });
-  
+
   if (splitIP.length !== 4) return false;
   
   for (let i = 0; i < splitIP.length; i++) {
