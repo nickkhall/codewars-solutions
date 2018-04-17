@@ -1,5 +1,4 @@
-
-n manipulateString(str, arr, measurement) {
+function manipulateString(str, arr, measurement) {
   let string = str;
 
   for (let i = 0; i < arr.length; i++) {
@@ -49,18 +48,11 @@ if (convertRecipe("Add to the mixing bowl and coat well with 1 tbsp of olive oil
   console.log('YOURS:', convertRecipe("Add to the mixing bowl and coat well with 1 tbsp of olive oil & 1/2 tbsp of dried dill"));
 }
 
-if (convertRecipe("pour 500 tsp of cocaine on your nostril") === "pour 500 tsp (7500g) of cocaine on your nostril") {
+if (convertRecipe("drizzle 1/2 tbsp of heroine on your eyelids") === "drizzle 1/2 tbsp (8g) of heroine on your eyelids") {
   console.log(true);
 } else {
   console.log(false);
-  console.log('YOURS:', convertRecipe("pour 500 tsp of cocaine on your nostril"));
-}
-
-if (convertRecipe("drizzle 1/2 tbsp of heroine on your testetestez") === "drizzle 1/2 tbsp (8g) of heroine on your testetestez") {
-  console.log(true);
-} else {
-  console.log(false);
-  console.log('YOURS:', convertRecipe("drizzle 1/2 tbsp of heroine on your testetestez"));
+  console.log('YOURS:', convertRecipe("drizzle 1/2 tbsp of heroine on your eyelids"));
 }
 
 if (convertRecipe("In another bowl, add 2 tsp of vanilla extract, 3 tsp of baking soda and 1/2 tsp of salt") === "In another bowl, add 2 tsp (10g) of vanilla extract, 3 tsp (15g) of baking soda and 1/2 tsp (3g) of salt") {
@@ -69,4 +61,3 @@ if (convertRecipe("In another bowl, add 2 tsp of vanilla extract, 3 tsp of bakin
   console.log(false);
   console.log('YOURS:', convertRecipe("In another bowl, add 2 tsp of vanilla extract, 3 tsp of baking soda and 1/2 tsp of salt"));
 }
-
