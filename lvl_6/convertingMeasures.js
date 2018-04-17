@@ -31,8 +31,6 @@ function convertRecipe(recipe){
   if (tspArr) {
     return manipulateString(recipe, tspArr, 5);
   }
-
-  return recipe;
 }
 
 // TESTS
