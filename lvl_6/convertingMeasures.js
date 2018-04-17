@@ -1,3 +1,5 @@
+// This is one of those times I think I didn't have the most efficient algorithm.. xP
+
 function manipulateString(str, arr, measurement) {
   let string = str;
 
