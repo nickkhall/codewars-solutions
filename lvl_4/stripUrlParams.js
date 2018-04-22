@@ -1,37 +1,37 @@
 function stripUrlParams(url, paramsToStrip){
   const hasQuery = url.indexOf('?') > -1;
   const queries = hasQuery ? url.substring(url.indexOf('?') + 1, url.length).split('&') : null;
-	const urlHome = url.substring(0, url.indexOf('?'));
-	let filteredQueries;
-	let finalQueryString = '';
+  const urlHome = hasQuery ? url.substring(0, url.indexOf('?')) : url;
+  let filteredQueries;
+  let finalQueryString = '';
 
-	if (queries) {
-		// Remove duplicate queries
-		const smallArr = queries.map(q => q.substring(0, q.indexOf('=')));
-		filteredQueries = queries.filter((q, index) => {
-			return smallArr.indexOf(q.substring(0, q.indexOf('='))) === index;
-		});
-	}
+  if (queries) {
+    // Remove duplicate queries
+    const smallArr = queries.map(q => q.substring(0, q.indexOf('=')));
+    filteredQueries = queries.filter((q, index) => {
+      return smallArr.indexOf(q.substring(0, q.indexOf('='))) === index;
+    });
+  }
 
-	// If paramsToStrip, remove params from url
-	if (paramsToStrip && filteredQueries) {
-		filteredQueries = filteredQueries.filter((fQ) => {
-			const query = fQ.substring(0, fQ.indexOf('='));
-			return !paramsToStrip.find(p => p === query);
-		});
-	}
+  // If paramsToStrip, remove params from url
+  if (paramsToStrip && filteredQueries) {
+    filteredQueries = filteredQueries.filter((fQ) => {
+      const query = fQ.substring(0, fQ.indexOf('='));
+      return !paramsToStrip.find(p => p === query);
+    });
+  }
 
-	console.log({ filteredQueries })
+  console.log({ filteredQueries, urlHome })
 
-	// If we had filters, generate query part of URL
-	if (filteredQueries) {
-		for (let q = 0; q < filteredQueries.length; q++) {
-			const query = filteredQueries[q]
-			finalQueryString += `${q === 0 ? '?' : ''}${query}${q !== filteredQueries.length -1 ? '&' : ''}`;
-		}
-	}
+  // If we had filters, generate query part of URL
+  if (filteredQueries) {
+    for (let q = 0; q < filteredQueries.length; q++) {
+      const query = filteredQueries[q]
+      finalQueryString += `${q === 0 ? '?' : ''}${query}${q !== filteredQueries.length -1 ? '&' : ''}`;
+    }
+  }
 
-	// Return final url
+  // Return final url
   return `${urlHome}${finalQueryString}`;
 };
 
