@@ -1,3 +1,5 @@
+// Not the best implementation, I know :/
+
 function stripUrlParams(url, paramsToStrip){
   const hasQuery = url.indexOf('?') > -1;
   const queries = hasQuery ? url.substring(url.indexOf('?') + 1, url.length).split('&') : null;
