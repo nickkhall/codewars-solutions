@@ -1,22 +1,59 @@
+const grabLastInArr = arr => arr[arr.length - 1];
+const grabFirstInArr = arr => arr[0];
+
 const snail = arr => {
-  return arr.reduce((acc,cur,index) => {
-    if (acc.length === 0) {
-      acc += cur;
-      return acc;
+  if (arr.length <= 0) return 'you fucking suck dude gimme an array';
+  if (arr.length === 1) return arr;
+  let finalArr = [];
+  const firstArr = arr[0];
+  finalArr = finalArr.concat(arr[0]);
+  arr.shift();
+  const lastArr = arr[arr.length-1];
+  // arr.pop();
+  let tempArr = [];
+
+  for (let a = 0; a < arr.length; a++) {
+    for (let i = 0; i < arr[a].length; i++) {
+      tempArr.push(arr[a][i]);
     }
-    return acc;
-  }, []);
+  }
+
+  console.log({ tempArr })
+
+  for (let n = 0; n < tempArr.length; n++) {
+    const len = n % arr.length;
+    const item = arr[len];
+    const switchToFirst = item.length + arr.length;
+    console.log({ len, item, switchToFirst })
+    if (item === lastArr) {
+      console.log('DING DING DING!!! LAST ARR', { item, lastArr })
+      finalArr = finalArr.concat(grabLastInArr(item));
+      item.pop();
+      lastArr.pop();
+      continue;
+    }
+    if (n > switchToFirst) {
+      console.log('this is after the last row has been all ADDED')
+      finalArr = finalArr.concat(grabFirstInArr(item));
+      item.shift();
+      continue;
+    }
+    finalArr = finalArr.concat(grabLastInArr(item));
+    item.pop();
+  }
+
+  return finalArr;
 }
 
 
 // TESTS
-const Test = { assertEquals: (actual, expected) => {
-  if (actual !== expected) {
-    console.log({ actual, expected });
-    throw new Error('FAILED!');
-  }
-  console.log('PASSED!');
-}};
+console.log(snail([[1,2,3,4],[12,13,14,5],[11,16,15,6],[10,9,8,7]]));
+console.log('-------------------------------------------------------------------');
+console.log([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]);
 
-Test.assertEquals(snail([[1,2,3],[4,5,6],[7,8,9]]), [1,2,3,6,9,8,7,4,5]);
-Test.assertEquals(snail([[1,2,3,4],[16,17,18,19,5],[15,25,20,6],[14,24,21,7],[13,23,22,8],[12,11,10,9],]), [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]);
+[1,2,3,4]
+
+[12,13,14,5]
+[11,16,15,6]
+
+[10,9,8,7]
