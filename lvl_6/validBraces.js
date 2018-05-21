@@ -1,13 +1,8 @@
 function isValid(b) {
-  console.log({ b });
-  return b.split('').reduce((acc,cur,index) => {
-    if (index === 0) {
-      acc += cur;
-      return acc;
-    }
+  const asciiArr = [40, 41, 91, 93, 123, 125];
+  const endAsciiArr = asciiArr.filter((a,i) => i % 2 !== 0);
 
 
-  }, '');
 }
 
 function validBraces(braces){
@@ -20,7 +15,7 @@ function validBraces(braces){
 // TESTS
 const Test = {
   assertEquals: (actual, expected) => {
-    if (!actual === expected) {
+    if (actual !== expected) {
       console.error(false);
       return;
     }
