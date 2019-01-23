@@ -22,7 +22,17 @@ const whoIsWinner = list => {
         const cur = board[x][y];
 
         if (cur) {
-          if ((board[x+1] && board[x+2] && board[x+3]) && board[x+1][y] && board[x+2][y] && board[x+3][y]) {
+          if (board[x][y-1] && board[x][y-2] && board[x][y-3]) {
+            if (cur === board[x][y-1] && cur === board[x][y-2] && cur === board[x][y-3]) {
+              if (cur.toLowerCase() === 'y') {
+                winner = 'Yellow';
+                return;
+              } else {
+                winner = 'Red';
+                return;
+              }
+            }
+          } else if ((board[x+1] && board[x+2] && board[x+3]) && board[x+1][y] && board[x+2][y] && board[x+3][y]) {
             if (cur === board[x+1][y] && cur === board[x+2][y] && cur === board[x+3][y]) {
               if (cur.toLowerCase() === 'y') {
                 winner = 'Yellow';
@@ -32,13 +42,15 @@ const whoIsWinner = list => {
                 return;
               }
             }
-          } else if (board[x-1] && board[x-2] && board[x-3] && (cur === board[x-1][y-1] && cur === board[x-2][y-2] && cur === board[x-3][y-3])) {
-            if (cur.toLowerCase() === 'y') {
-              winner = 'Yellow';
-              return;
-            } else {
-              winner = 'Red';
-              return;
+          } else if (board[x-1] && board[x-2] && board[x-3] && board[x-1][y-3] && board[x-2][y-3] && board[x-3][y-3]) {
+            if (cur === board[x-1][y-1] && cur === board[x-2][y-2] && cur === board[x-3][y-3]) {
+              if (cur.toLowerCase() === 'y') {
+                winner = 'Yellow';
+                return;
+              } else {
+                winner = 'Red';
+                return;
+              }
             }
           }
         }
@@ -50,10 +62,9 @@ const whoIsWinner = list => {
 
   while (turn < list.length) {
     populateBoard();
+    determineWinner();
     turn += 1;
   }
-
-  determineWinner();
 
   console.log(`Winner: ${winner}`)
   return winner;
@@ -92,7 +103,7 @@ whoIsWinner([
   "E_Red",
   "D_Yellow"
 ]);
-console.log('expected: ', "Red\n\n");
+console.log('Expected: ', "Red");
 
 
 // 2
@@ -127,7 +138,7 @@ whoIsWinner([
   "D_Yellow",
   "C_Red"
 ]);
-console.log('expected: ', "Yellow\n\n");
+console.log('Expected: ', "Yellow");
 
 //3
 console.log('3 -');
@@ -139,7 +150,7 @@ whoIsWinner([
   "F_Red",
   "G_Yellow"
 ]);
-console.log('expected: ', "Draw\n\n");
+console.log('Expected: ', "Draw");
 
 // 4
 console.log('4 -');
@@ -166,7 +177,7 @@ whoIsWinner([
   'F_Yellow',
   'A_Red' ]);
 
-console.log("expected: Yellow\n\n");
+console.log("Expected: Yellow");
 
 // 5
 console.log('5 -');
@@ -198,7 +209,7 @@ whoIsWinner([
   'D_Red',
   'E_Yellow' ]);
 
-  console.log('expected: Red\n\n');
+  console.log('Expected: Red');
 
 // 6
 console.log('6 -');
@@ -225,8 +236,207 @@ whoIsWinner([
   'E_Yellow',
   'C_Red' ]);
 
-  console.log('expected: Yellow\n\n');
+  console.log('Expected: Yellow\n\n');
 
+console.log('7 - ');
+whoIsWinner([
+  'F_Yellow',
+  'G_Red',
+  'D_Yellow',
+  'C_Red',
+  'A_Yellow',
+  'A_Red',
+  'E_Yellow',
+  'D_Red',
+  'D_Yellow',
+  'F_Red',
+  'B_Yellow',
+  'E_Red',
+  'C_Yellow',
+  'D_Red',
+  'F_Yellow',
+  'D_Red',
+  'D_Yellow',
+  'F_Red',
+  'G_Yellow',
+  'C_Red',
+  'F_Yellow',
+  'E_Red',
+  'A_Yellow',
+  'A_Red',
+  'C_Yellow',
+  'B_Red',
+  'E_Yellow',
+  'C_Red',
+  'E_Yellow',
+  'G_Red',
+  'A_Yellow',
+  'A_Red',
+  'G_Yellow',
+  'C_Red',
+  'B_Yellow',
+  'E_Red',
+  'F_Yellow',
+  'G_Red',
+  'G_Yellow',
+  'B_Red',
+  'B_Yellow',
+  'B_Red' ]);
+console.log('Expected: Red');
+
+console.log('8 - ');
+whoIsWinner([
+  'B_Red',
+  'D_Yellow',
+  'B_Red',
+  'E_Yellow',
+  'C_Red',
+  'C_Yellow',
+  'B_Red',
+  'F_Yellow',
+  'A_Red',
+  'G_Yellow',
+  'B_Red',
+  'F_Yellow',
+  'F_Red',
+  'F_Yellow',
+  'F_Red',
+  'G_Yellow',
+  'A_Red',
+  'C_Yellow',
+  'G_Red',
+  'E_Yellow',
+  'E_Red',
+  'E_Yellow',
+  'G_Red',
+  'E_Yellow',
+  'B_Red',
+  'C_Yellow',
+  'E_Red' ]);
+console.log('Expected: Yellow');
+
+console.log('9 - ');
+whoIsWinner(
+  [ 'A_Red',
+  'A_Yellow',
+  'C_Red',
+  'B_Yellow',
+  'D_Red',
+  'G_Yellow',
+  'G_Red',
+  'D_Yellow',
+  'G_Red',
+  'F_Yellow',
+  'C_Red',
+  'E_Yellow',
+  'D_Red',
+  'F_Yellow',
+  'F_Red',
+  'C_Yellow',
+  'D_Red',
+  'C_Yellow',
+  'B_Red',
+  'A_Yellow',
+  'D_Red',
+  'B_Yellow',
+  'A_Red',
+  'B_Yellow',
+  'G_Red',
+  'B_Yellow',
+  'C_Red',
+  'A_Yellow',
+  'F_Red',
+  'A_Yellow' ]);
+console.log('Expected: Yellow');
+
+console.log('10 - ');
+whoIsWinner([
+  'E_Red',
+  'E_Yellow',
+  'B_Red',
+  'B_Yellow',
+  'D_Red',
+  'E_Yellow',
+  'B_Red',
+  'F_Yellow',
+  'G_Red',
+  'G_Yellow',
+  'D_Red',
+  'C_Yellow',
+  'A_Red',
+  'D_Yellow',
+  'B_Red',
+  'B_Yellow',
+  'E_Red',
+  'C_Yellow',
+  'C_Red',
+  'B_Yellow' ]);
+console.log('Expected: Red');
+
+console.log('11 - ');
+whoIsWinner([
+  'B_Red',
+  'D_Yellow',
+  'B_Red',
+  'C_Yellow',
+  'F_Red',
+  'F_Yellow',
+  'G_Red',
+  'D_Yellow',
+  'D_Red',
+  'C_Yellow',
+  'F_Red',
+  'G_Yellow',
+  'C_Red',
+  'B_Yellow',
+  'A_Red',
+  'A_Yellow',
+  'B_Red',
+  'G_Yellow',
+  'G_Red',
+  'G_Yellow',
+  'A_Red',
+  'A_Yellow',
+  'F_Red',
+  'E_Yellow',
+  'B_Red',
+  'G_Yellow' ]);
+console.log('Expected: Yellow');
+
+console.log('12 - ');
+whoIsWinner([
+  'D_Red',
+  'C_Yellow',
+  'D_Red',
+  'C_Yellow',
+  'F_Red',
+  'D_Yellow',
+  'G_Red',
+  'C_Yellow',
+  'E_Red',
+  'F_Yellow',
+  'D_Red',
+  'A_Yellow',
+  'B_Red',
+  'A_Yellow',
+  'E_Red',
+  'C_Yellow',
+  'G_Red',
+  'E_Yellow',
+  'E_Red',
+  'B_Yellow',
+  'A_Red',
+  'D_Yellow',
+  'G_Red',
+  'F_Yellow',
+  'B_Red',
+  'G_Yellow',
+  'C_Red',
+  'G_Yellow',
+  'F_Red',
+  'E_Yellow',
+  'G_Red' ]);
+console.log('Expected: Red');
 
 // DIAG
 //      A   B   C   D   E   F   G
