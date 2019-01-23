@@ -69,6 +69,5 @@ const whoIsWinner = list => {
     turn += 1;
   } while (!gameOver && turn < list.length);
 
-  console.log(`Winner: ${winner}`)
   return winner;
 }
