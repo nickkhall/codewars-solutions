@@ -2,6 +2,7 @@ class Inspector {
 	constructor(person) {
 		this.person;
 		this.bulletin;
+		this.countries = [];
 
 		this.receiveBulletin = this.receiveBulletin.bind(this);
 		this.inspect = this.inspect.bind(this);
@@ -9,11 +10,16 @@ class Inspector {
 
 	receiveBulletin(bulletin) {
 		this.bulletin = bulletin.split('\n');
-		console.log('bulletin:', this.bulletin)
+		console.log('bulletin:', this.bulletin);
 	}
 
 	inspect(person) {
-		this.person = person;
+		const keys = Object.keys(person);
+		for (let i = 0; i < keys.length; i++) {
+			console.log(keys[i])
+			this.person[keys[i]] = person[keys[i]].split('\n');
+		}
+
 		console.log('person:', this.person)
 	}
 }
